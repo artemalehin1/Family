@@ -1,38 +1,38 @@
-//Взаимодейсвие с пикапом
+//Р’Р·Р°РёРјРѕРґРµР№СЃРІРёРµ СЃ РїРёРєР°РїРѕРј
 if(IsPlayerInRangeOfPoint(playerid,1.0, 124.6455,122.6624,1003.0521)) {
-    D(playerid, D_FAMILY_OFFICE, DSL, ""P"Семейный центр", ""P"1."W" Создать семью\n"P"2."W" Рейтинг семей", "Выбрать", "Отмена");
+    D(playerid, D_FAMILY_OFFICE, DSL, ""P"РЎРµРјРµР№РЅС‹Р№ С†РµРЅС‚СЂ", ""P"1."W" РЎРѕР·РґР°С‚СЊ СЃРµРјСЊСЋ\n"P"2."W" Р РµР№С‚РёРЅРі СЃРµРјРµР№", "Р’С‹Р±СЂР°С‚СЊ", "РћС‚РјРµРЅР°");
 }
 //OnDialogReponse
 case D_FAMILY_OFFICE: {
         if(!response) return true;
         switch(listitem) {
-        case 0: D(playerid,D_FAMILY_CREATE,DSI, ""P"Создание семьи","\n\n"W"Название семьи должно состоять от 6 до 30 символов.\n\nСтоимость создания семьи - "GREEN"2.000.000$\n\n"W"Введите ниже название семьи:","Создать","Отмена");
-        case 1: D(playerid,D_FAMILY_OFFICE_1,DSL, ""P"Рейтинг семей",""P"1."W" По рейтингу\n"P"2."W" По талонам","Выбрать","Отмена");
+        case 0: D(playerid,D_FAMILY_CREATE,DSI, ""P"РЎРѕР·РґР°РЅРёРµ СЃРµРјСЊРё","\n\n"W"РќР°Р·РІР°РЅРёРµ СЃРµРјСЊРё РґРѕР»Р¶РЅРѕ СЃРѕСЃС‚РѕСЏС‚СЊ РѕС‚ 6 РґРѕ 30 СЃРёРјРІРѕР»РѕРІ.\n\nРЎС‚РѕРёРјРѕСЃС‚СЊ СЃРѕР·РґР°РЅРёСЏ СЃРµРјСЊРё - "GREEN"2.000.000$\n\n"W"Р’РІРµРґРёС‚Рµ РЅРёР¶Рµ РЅР°Р·РІР°РЅРёРµ СЃРµРјСЊРё:","РЎРѕР·РґР°С‚СЊ","РћС‚РјРµРЅР°");
+        case 1: D(playerid,D_FAMILY_OFFICE_1,DSL, ""P"Р РµР№С‚РёРЅРі СЃРµРјРµР№",""P"1."W" РџРѕ СЂРµР№С‚РёРЅРіСѓ\n"P"2."W" РџРѕ С‚Р°Р»РѕРЅР°Рј","Р’С‹Р±СЂР°С‚СЊ","РћС‚РјРµРЅР°");
         }
     }
 case D_FAMILY_CREATE: {
         if(!response) return 1;
-        if(PI[playerid][pFamily] > 0) return SendClientMessage(playerid, COLOR_GREY, "Вы состоите в семье");
+        if(PI[playerid][pFamily] > 0) return SendClientMessage(playerid, COLOR_GREY, "Р’С‹ СЃРѕСЃС‚РѕРёС‚Рµ РІ СЃРµРјСЊРµ");
         if(!strlen(inputtext) || strlen(inputtext) < 6 || strlen(inputtext) > 30) {
-            D(playerid,D_FAMILY_CREATE,DSI, ""P"Создание семьи","\n\n"W"Название семьи должно состоять от 6 до 30 символов.\n\nСтоимость создания семьи - "GREEN"2.000.000$\n\n"W"Введите ниже название семьи:","Создать","Отмена");
+            D(playerid,D_FAMILY_CREATE,DSI, ""P"РЎРѕР·РґР°РЅРёРµ СЃРµРјСЊРё","\n\n"W"РќР°Р·РІР°РЅРёРµ СЃРµРјСЊРё РґРѕР»Р¶РЅРѕ СЃРѕСЃС‚РѕСЏС‚СЊ РѕС‚ 6 РґРѕ 30 СЃРёРјРІРѕР»РѕРІ.\n\nРЎС‚РѕРёРјРѕСЃС‚СЊ СЃРѕР·РґР°РЅРёСЏ СЃРµРјСЊРё - "GREEN"2.000.000$\n\n"W"Р’РІРµРґРёС‚Рµ РЅРёР¶Рµ РЅР°Р·РІР°РЅРёРµ СЃРµРјСЊРё:","РЎРѕР·РґР°С‚СЊ","РћС‚РјРµРЅР°");
             return true;
         }
         if(isnull(inputtext)) {
-            D(playerid,D_FAMILY_CREATE,DSI, ""P"Создание семьи","\n\n"W"Название семьи должно состоять от 6 до 30 символов.\n\nСтоимость создания семьи - "GREEN"2.000.000$\n\n"W"Введите ниже название семьи:","Создать","Отмена");
+            D(playerid,D_FAMILY_CREATE,DSI, ""P"РЎРѕР·РґР°РЅРёРµ СЃРµРјСЊРё","\n\n"W"РќР°Р·РІР°РЅРёРµ СЃРµРјСЊРё РґРѕР»Р¶РЅРѕ СЃРѕСЃС‚РѕСЏС‚СЊ РѕС‚ 6 РґРѕ 30 СЃРёРјРІРѕР»РѕРІ.\n\nРЎС‚РѕРёРјРѕСЃС‚СЊ СЃРѕР·РґР°РЅРёСЏ СЃРµРјСЊРё - "GREEN"2.000.000$\n\n"W"Р’РІРµРґРёС‚Рµ РЅРёР¶Рµ РЅР°Р·РІР°РЅРёРµ СЃРµРјСЊРё:","РЎРѕР·РґР°С‚СЊ","РћС‚РјРµРЅР°");
             return true;
         }
-        if(PI[playerid][pCash] < 2000000) return SendClientMessage(playerid, COLOR_GREY, "У Вас недостаточно денег");
+        if(PI[playerid][pCash] < 2000000) return SendClientMessage(playerid, COLOR_GREY, "РЈ Р’Р°СЃ РЅРµРґРѕСЃС‚Р°С‚РѕС‡РЅРѕ РґРµРЅРµРі");
         create_family(playerid, inputtext);
-        GiveMoney(playerid,-2000000,"создание семьи");
+        GiveMoney(playerid,-2000000,"СЃРѕР·РґР°РЅРёРµ СЃРµРјСЊРё");
     }
 //
 stock create_family(playerid, inputtext[]) {
-	if(TotalFamily >= FAMILY_COUNT) return SendClientMessage(playerid, COLOR_GREY, "На сервере достигнут лимит семей");
+	if(TotalFamily >= FAMILY_COUNT) return SendClientMessage(playerid, COLOR_GREY, "РќР° СЃРµСЂРІРµСЂРµ РґРѕСЃС‚РёРіРЅСѓС‚ Р»РёРјРёС‚ СЃРµРјРµР№");
 	new query[128];
 	mysql_format(connects, query, sizeof(query),"SELECT * FROM family WHERE name = '%s'",inputtext);
 	new Cache:result = mysql_query(connects, query);
 	if(cache_num_rows()) {
-		SendClientMessage(playerid, COLOR_GREY, "Семья с таким именем уже существует");
+		SendClientMessage(playerid, COLOR_GREY, "РЎРµРјСЊСЏ СЃ С‚Р°РєРёРј РёРјРµРЅРµРј СѓР¶Рµ СЃСѓС‰РµСЃС‚РІСѓРµС‚");
 		cache_delete(result);
 		return 1;
 	}
@@ -51,9 +51,9 @@ stock create_family(playerid, inputtext[]) {
 	SetString(gFamily[TotalFamily][famMessage],"None");
 	gFamily[TotalFamily][famInvRang] = gFamily[TotalFamily][famUninvRang] = gFamily[TotalFamily][famGiveRang] = 7;
 	new string[128];
-	format(string,sizeof(string),"Поздравляем с созданием семьи - "ORANGE"%s",gFamily[TotalFamily][famCName]);
+	format(string,sizeof(string),"РџРѕР·РґСЂР°РІР»СЏРµРј СЃ СЃРѕР·РґР°РЅРёРµРј СЃРµРјСЊРё - "ORANGE"%s",gFamily[TotalFamily][famCName]);
 	SendUse(playerid,string);
-	SendOk(playerid,"Управление семьей - /fmenu");
+	SendOk(playerid,"РЈРїСЂР°РІР»РµРЅРёРµ СЃРµРјСЊРµР№ - /fmenu");
 	PI[playerid][pFamily] = TotalFamily + 1;
 	UpdatePlayerData(playerid,"family",PI[playerid][pFamily]);
 	PI[playerid][pFamRank] = 8;
