@@ -72,3 +72,170 @@ stock create_family(playerid, inputtext[]) {
 	TotalFamily++;
 	return true;
 }
+stock load_family() {
+	new Cache:result;
+	result = mysql_query (connects, "SELECT * FROM `family`");
+	TotalFamily = cache_num_rows();
+	if(TotalFamily >= FAMILY_COUNT) print("Кол-во семей в базе больше максимального");
+	else if(!TotalFamily) print("Семьи в базе не найдены");
+	else for(new i = 0; i < TotalFamily; i++) {
+		cache_get_value_name_int(i,"id", gFamily[i][famID]);
+
+		cache_get_value(i,"cname",gFamily[i][famCName], 32);
+		cache_get_value(i,"name",gFamily[i][famName], 32);
+		cache_get_value(i,"time",gFamily[i][famDate], 32);
+
+		cache_get_value(i,"cowner",gFamily[i][famCOwner], MAX_PLAYER_NAME);
+		cache_get_value(i,"owner",gFamily[i][famOwner], MAX_PLAYER_NAME);
+
+		cache_get_value_int(i,"color",gFamily[i][famColor]);
+		cache_get_value_int(i,"drugs",gFamily[i][famDrugs]);
+		cache_get_value_int(i,"mats",gFamily[i][famMats]);
+
+		cache_get_value_int(i,"invite",gFamily[i][famInvRang]);
+		cache_get_value_int(i,"uninvite",gFamily[i][famUninvRang]);
+		cache_get_value_int(i,"giverank",gFamily[i][famGiveRang]);
+		cache_get_value_int(i,"sklad",gFamily[i][famSklad]);
+		cache_get_value_int(i,"money_rank",gFamily[i][famSkladMoney]);
+		cache_get_value_int(i,"spawn_rank",gFamily[i][famSpawnCar]);
+		cache_get_value_int(i,"car_rank",gFamily[i][famBuyCar]);
+		
+		cache_get_value_int(i,"sklad_status",gFamily[i][famskladSt]);
+		
+		cache_get_value_name(i, "Rank_1", FamRanks[i][0], 24);
+		cache_get_value_name(i, "Rank_2", FamRanks[i][1], 24);
+		cache_get_value_name(i, "Rank_3", FamRanks[i][2], 24);
+		cache_get_value_name(i, "Rank_4", FamRanks[i][3], 24);
+		cache_get_value_name(i, "Rank_5", FamRanks[i][4], 24);
+		cache_get_value_name(i, "Rank_6", FamRanks[i][5], 24);
+		cache_get_value_name(i, "Rank_7", FamRanks[i][6], 24);
+		cache_get_value_name(i, "Rank_8", FamRanks[i][7], 24);
+
+		cache_get_value_name(i, "message", gFamily[i][famMessage], 71);
+
+		cache_get_value_int(i,"talon",gFamily[i][famTalon]);
+		cache_get_value_int(i,"point",gFamily[i][famPoint]);
+		cache_get_value_int(i,"house",gFamily[i][famHouse]);
+		cache_get_value_int(i,"type",gFamily[i][famType]);
+		cache_get_value_int(i,"nation",gFamily[i][famNation]);
+		
+		cache_get_value_int(i,"ulush_house",gFamily[i][famUlushHouse]);
+		
+		cache_get_value_int(i,"ulush_car_1",gFamily[i][famUlushCar][1]);
+		cache_get_value_int(i,"ulush_car_2",gFamily[i][famUlushCar][2]);
+		cache_get_value_int(i,"ulush_car_3",gFamily[i][famUlushCar][3]);
+		cache_get_value_int(i,"ulush_car_4",gFamily[i][famUlushCar][4]);
+		
+		cache_get_value_int(i,"car_1",CarFamily[i][0][carID]);
+		cache_get_value_int(i,"car_2",CarFamily[i][1][carID]);
+		cache_get_value_int(i,"car_3",CarFamily[i][2][carID]);
+		cache_get_value_int(i,"car_4",CarFamily[i][3][carID]);
+		cache_get_value_int(i,"car_5",CarFamily[i][4][carID]);
+		
+		new sscanf_str_1[320];
+		cache_get_value_name(i,"components_0", sscanf_str_1, 128 ) ;
+		sscanf ( sscanf_str_1, "p<|>dddddddddddddd",CarFamily[i][0][famVehcom_1],CarFamily[i][0][famVehcom_2],CarFamily[i][0][famVehcom_3],
+		CarFamily[i][0][famVehcom_4],CarFamily[i][0][famVehcom_5],CarFamily[i][0][famVehcom_6],
+		CarFamily[i][0][famVehcom_7],CarFamily[i][0][famVehcom_8],CarFamily[i][0][famVehcom_9],
+		CarFamily[i][0][famVehcom_10],CarFamily[i][0][famVehcom_11],CarFamily[i][0][famVehcom_12],
+		CarFamily[i][0][famVehcom_13],CarFamily[i][0][famVehcom_14]);
+		
+		new sscanf_str_2[320];
+		cache_get_value_name(i,"components_1", sscanf_str_2, 128 ) ;
+		sscanf ( sscanf_str_2, "p<|>dddddddddddddd",CarFamily[i][1][famVehcom_1],CarFamily[i][1][famVehcom_2],CarFamily[i][1][famVehcom_3],
+		CarFamily[i][1][famVehcom_4],CarFamily[i][1][famVehcom_5],CarFamily[i][1][famVehcom_6],
+		CarFamily[i][1][famVehcom_7],CarFamily[i][1][famVehcom_8],CarFamily[i][1][famVehcom_9],
+		CarFamily[i][1][famVehcom_10],CarFamily[i][1][famVehcom_11],CarFamily[i][1][famVehcom_12],
+		CarFamily[i][1][famVehcom_13],CarFamily[i][1][famVehcom_14]);
+		
+		new sscanf_str_3[320];
+		cache_get_value_name(i,"components_2", sscanf_str_3, 128 ) ;
+		sscanf ( sscanf_str_3, "p<|>dddddddddddddd",CarFamily[i][2][famVehcom_1],CarFamily[i][2][famVehcom_2],CarFamily[i][2][famVehcom_3],
+		CarFamily[i][2][famVehcom_4],CarFamily[i][2][famVehcom_5],CarFamily[i][2][famVehcom_6],
+		CarFamily[i][2][famVehcom_7],CarFamily[i][2][famVehcom_8],CarFamily[i][2][famVehcom_9],
+		CarFamily[i][2][famVehcom_10],CarFamily[i][2][famVehcom_11],CarFamily[i][2][famVehcom_12],
+		CarFamily[i][2][famVehcom_13],CarFamily[i][2][famVehcom_14]);
+		
+		new sscanf_str_4[320];
+		cache_get_value_name(i,"components_3", sscanf_str_4, 128 ) ;
+		sscanf ( sscanf_str_4, "p<|>dddddddddddddd",CarFamily[i][3][famVehcom_1],CarFamily[i][3][famVehcom_2],CarFamily[i][3][famVehcom_3],
+		CarFamily[i][3][famVehcom_4],CarFamily[i][3][famVehcom_5],CarFamily[i][3][famVehcom_6],
+		CarFamily[i][3][famVehcom_7],CarFamily[i][3][famVehcom_8],CarFamily[i][3][famVehcom_9],
+		CarFamily[i][3][famVehcom_10],CarFamily[i][3][famVehcom_11],CarFamily[i][3][famVehcom_12],
+		CarFamily[i][3][famVehcom_13],CarFamily[i][3][famVehcom_14]);
+		
+		new sscanf_str_5[320];
+		cache_get_value_name(i,"components_4", sscanf_str_5, 128 ) ;
+		sscanf ( sscanf_str_5, "p<|>dddddddddddddd",CarFamily[i][4][famVehcom_1],CarFamily[i][4][famVehcom_2],CarFamily[i][4][famVehcom_3],
+		CarFamily[i][4][famVehcom_4],CarFamily[i][4][famVehcom_5],CarFamily[i][4][famVehcom_6],
+		CarFamily[i][4][famVehcom_7],CarFamily[i][4][famVehcom_8],CarFamily[i][4][famVehcom_9],
+		CarFamily[i][4][famVehcom_10],CarFamily[i][4][famVehcom_11],CarFamily[i][4][famVehcom_12],
+		CarFamily[i][4][famVehcom_13],CarFamily[i][4][famVehcom_14]);
+		
+		new sscanf_paint[320];
+		cache_get_value_name(i,"paint_0", sscanf_paint, 128 ) ;
+		sscanf (sscanf_paint, "p<|>ddd",CarFamily[i][0][famVehColor],CarFamily[i][0][famVehColor_1],CarFamily[i][0][famVehPaint]);
+		
+		cache_get_value_name(i,"paint_1", sscanf_paint, 128 ) ;
+		sscanf (sscanf_paint, "p<|>ddd",CarFamily[i][1][famVehColor],CarFamily[i][1][famVehColor_1],CarFamily[i][1][famVehPaint]);
+		
+		cache_get_value_name(i,"paint_2", sscanf_paint, 128 ) ;
+		sscanf (sscanf_paint, "p<|>ddd",CarFamily[i][2][famVehColor],CarFamily[i][2][famVehColor_1],CarFamily[i][2][famVehPaint]);
+		
+		cache_get_value_name(i,"paint_3", sscanf_paint, 128 ) ;
+		sscanf (sscanf_paint, "p<|>ddd",CarFamily[i][3][famVehColor],CarFamily[i][3][famVehColor_1],CarFamily[i][3][famVehPaint]);
+		
+		cache_get_value_name(i,"paint_4", sscanf_paint, 128 ) ;
+		sscanf (sscanf_paint, "p<|>ddd",CarFamily[i][4][famVehColor],CarFamily[i][4][famVehColor_1],CarFamily[i][4][famVehPaint]);
+
+		new sscanf_st[50];
+		cache_get_value_name(i,"poscar1", sscanf_st, 30);
+		sscanf(sscanf_st, "p<,>ffff",CarFamily[i][0][fam_cx],CarFamily[i][0][fam_cy],CarFamily[i][0][fam_cz],CarFamily[i][0][fam_ca]);
+
+		cache_get_value_name(i,"poscar2", sscanf_st, 30);
+		sscanf(sscanf_st, "p<,>ffff",CarFamily[i][1][fam_cx],CarFamily[i][1][fam_cy],CarFamily[i][1][fam_cz],CarFamily[i][1][fam_ca]);
+
+		cache_get_value_name(i,"poscar3", sscanf_st, 30);
+		sscanf(sscanf_st, "p<,>ffff",CarFamily[i][2][fam_cx],CarFamily[i][2][fam_cy],CarFamily[i][2][fam_cz],CarFamily[i][2][fam_ca]);
+
+		cache_get_value_name(i,"poscar4", sscanf_st, 30);
+		sscanf(sscanf_st, "p<,>ffff",CarFamily[i][3][fam_cx],CarFamily[i][3][fam_cy],CarFamily[i][3][fam_cz],CarFamily[i][3][fam_ca]);
+
+		cache_get_value_name(i,"poscar5", sscanf_st, 30);
+		sscanf(sscanf_st, "p<,>ffff",CarFamily[i][4][fam_cx],CarFamily[i][4][fam_cy],CarFamily[i][4][fam_cz],CarFamily[i][4][fam_ca]);
+		
+		CarFamily[i][0][LoadCar] = INVALID_VEHICLE_ID;
+		CarFamily[i][1][LoadCar] = INVALID_VEHICLE_ID;
+		CarFamily[i][2][LoadCar] = INVALID_VEHICLE_ID;
+		CarFamily[i][3][LoadCar] = INVALID_VEHICLE_ID;
+		CarFamily[i][4][LoadCar] = INVALID_VEHICLE_ID;
+		
+		if(gFamily[i][famHouse])
+		{
+			for(new c = 0; c < 5; c++) {
+				if(CarFamily[i][c][fam_cx] != 0)
+				{
+					new str[56];
+					format(str,56,"{%s}%s",FamilyColor[gFamily[i][famColor]], gFamily[i][famName]);
+					
+					CarFamily[i][c][LoadCar] = A_CreateVehicle(CarFamily[i][c][carID], CarFamily[i][c][fam_cx],CarFamily[i][c][fam_cy],CarFamily[i][c][fam_cz],CarFamily[i][c][fam_ca], FamilyColorC[gFamily[i][famColor]], FamilyColorC[gFamily[i][famColor]], -1, VEHICLE_TYPE_FAMILY);
+					VehicleInfo[CarFamily[i][c][LoadCar]][vFamily] = gFamily[i][famID];
+					
+					VehicleInfo[CarFamily[i][c][LoadCar]][vFuel] = 100;
+					VehicleInfo[CarFamily[i][c][LoadCar]][vAkum] = 100;
+					VehicleInfo[CarFamily[i][c][LoadCar]][vFslot] = c;
+					SetVehicleNumberText(CarFamily[i][c][LoadCar], str);
+					LoadFamilyTuning(i, CarFamily[i][c][LoadCar], c);
+					
+					VehicleInfo[CarFamily[i][c][LoadCar]][vColor][0] = CarFamily[i][c][famVehColor];
+					VehicleInfo[CarFamily[i][c][LoadCar]][vColor][1] = CarFamily[i][c][famVehColor_1];
+					
+					ChangeVehicleColor(CarFamily[i][c][LoadCar], VehicleInfo[CarFamily[i][c][LoadCar]][vColor][0], VehicleInfo[CarFamily[i][c][LoadCar]][vColor][1]);
+				}
+			}
+		}
+	}
+	cache_delete(result);
+	printf("[Загрузка ...] Семьи успешно загружены (%i шт.)",TotalFamily);
+	return 1;
+}
